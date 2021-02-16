@@ -1,0 +1,5 @@
+.ui.container .ui.form .fields {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}

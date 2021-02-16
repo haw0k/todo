@@ -1,0 +1,35 @@
+.todo {
+  text-decoration: none;
+  font-weight: normal;
+  color: white !important;
+  text-shadow: 0px 0px 3px rgba(0, 0, 0, 1);
+}
+
+.grey .todo.done {
+  text-decoration: line-through;
+  color: black;
+}
+
+.todo.important {
+  font-weight: bold;
+  color: white;
+}
+
+.todo.important.done {
+  color: black;
+}
+
+.ui.items > .item > .content {
+  display: grid !important;
+  grid-template-columns: auto 1fr auto;
+  column-gap: 15px;
+  align-items: center;
+}
+
+.ui.items > .item > .content > .button {
+  margin: 0;
+}
+
+.content > .ui.segment {
+  margin: 0;
+}

@@ -1,0 +1,37 @@
+.filter {
+  padding-bottom: 14px;
+}
+
+.ui.positive.button {
+  box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 1) !important;
+}
+
+.ui.button {
+  box-shadow: inset 0px 0px 0px 1px transparent !important;
+  border: 1px solid transparent !important;
+}
+
+.ui.teal.positive.button {
+  background-color: #009c95 !important;
+  border: 1px solid #009c95;
+}
+
+.ui.blue.positive.button {
+  background-color: #19639c !important;
+  border: 1px solid #19639c;
+}
+
+.ui.grey.positive.button {
+  background-color: #5e5e5e !important;
+  border: 1px solid #5e5e5e;
+}
+
+.ui.orange.positive.button {
+  background-color: #df691a !important;
+  border: 1px solid #df691a;
+}
+
+.ui.teal.button {
+  background-color: #00b5ad !important;
+  border: 1px solid #00b5ad;
+}

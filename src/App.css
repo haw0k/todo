@@ -1,0 +1,16 @@
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgb(41, 41, 41);
+}
+
+header {
+  margin-bottom: 30px;
+}
+
+footer {
+  margin-top: 30px;
+  padding: 10px 0;
+}
