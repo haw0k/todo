@@ -1,3 +1,4 @@
+import { title } from "process";
 import {
   TodoState,
   StoreActionTypes,
@@ -6,18 +7,28 @@ import {
   TOGGLE_TODO,
 } from "./interfaces";
 
-const initialState: TodoState = [];
+const initialState: TodoState = [
+  {
+    id: 1,
+    title: "Drink coffeee",
+    completed: false,
+    important: false,
+    show: true,
+  }
+];
 
-const reducer = (state = initialState, action: StoreActionTypes) => {
+
+const reducer = (state: TodoState = initialState, action: StoreActionTypes) => {
   switch (action.type) {
     case ADD_TODO:
       return [
         ...state,
-        { id: action.id, title: action.title, completed: false },
+        { id: action.id, title: action.title, completed: false, show: true },
       ];
 
-    case DELETE_TODO:
+    case DELETE_TODO: {
       return state.filter((item) => item.id !== action.id);
+    }
 
     case TOGGLE_TODO:
       return state.map((todo) =>
@@ -28,5 +39,6 @@ const reducer = (state = initialState, action: StoreActionTypes) => {
       return state;
   }
 };
+
 
 export default reducer;

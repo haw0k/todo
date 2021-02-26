@@ -7,6 +7,7 @@ import {
 
 let nextTodoId: number = 0;
 
+// action creators
 export const add = (title: string): StoreActionTypes => ({
   type: ADD_TODO,
   id: nextTodoId++,
