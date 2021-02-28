@@ -2,24 +2,30 @@ import {
   ADD_TODO,
   DELETE_TODO,
   TOGGLE_TODO,
+  FILTER_TODO,
   StoreActionTypes,
+  FilterType,
 } from "./interfaces";
 
 let nextTodoId: number = 0;
 
-// action creators
-export const add = (title: string): StoreActionTypes => ({
+export const addItem = (title: string): StoreActionTypes => ({
   type: ADD_TODO,
   id: nextTodoId++,
   title,
 });
 
-export const remove = (id: number): StoreActionTypes => ({
+export const removeItem = (id: number): StoreActionTypes => ({
   type: DELETE_TODO,
   id,
 });
 
-export const toggle = (id: number): StoreActionTypes => ({
+export const toggleItem = (id: number): StoreActionTypes => ({
   type: TOGGLE_TODO,
   id,
+});
+
+export const filterItems = (filter: FilterType): StoreActionTypes => ({
+  type: FILTER_TODO,
+  filter,
 });

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Item } from "semantic-ui-react";
-import { TodoState } from "../interfaces";
-import Todo from "./Todo";
+import { TodoState } from "../../interfaces";
+import Todo from "../todo/Todo";
 
 interface IProps {
   todos: TodoState;

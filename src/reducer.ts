@@ -1,44 +1,100 @@
-import { title } from "process";
 import {
-  TodoState,
+  StoreState,
   StoreActionTypes,
   ADD_TODO,
   DELETE_TODO,
   TOGGLE_TODO,
+  FILTER_TODO,
 } from "./interfaces";
 
-const initialState: TodoState = [
-  {
+const initialState: StoreState = {
+  todos: [{
     id: 1,
-    title: "Drink coffeee",
+    title: 'Learn Redux',
+    important: true,
     completed: false,
-    important: false,
-    show: true,
-  }
-];
+    show:true,
+  }],
+  filter: "ALL",
+};
 
-
-const reducer = (state: TodoState = initialState, action: StoreActionTypes) => {
+const reducer = (state = initialState, action: StoreActionTypes) => {
+  const { todos, filter } = state;
   switch (action.type) {
     case ADD_TODO:
-      return [
-        ...state,
-        { id: action.id, title: action.title, completed: false, show: true },
-      ];
+      return {
+        todos: [
+          ...todos,
+          {
+            id: action.id,
+            title: action.title,
+            important: false,
+            completed: false,
+            show: true,
+          },
+        ],
+        filter,
+      };
 
-    case DELETE_TODO: {
-      return state.filter((item) => item.id !== action.id);
-    }
+    case DELETE_TODO:
+      return {
+        todos: todos.filter((item) => item.id !== action.id),
+        filter,
+      };
 
     case TOGGLE_TODO:
-      return state.map((todo) =>
-        todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
-      );
+      return {
+        todos: todos.map((todo) =>
+          todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
+        ),
+        filter,
+      };
+
+    case FILTER_TODO:
+      switch (action.filter) {
+        case "ALL":
+          return {
+            todos: todos.map((item) => ({ ...item, show: true })),
+            filter,
+          };
+
+        case "ACTIVE":
+          return {
+            todos: todos.map((item) =>
+              item.completed
+                ? { ...item, show: false }
+                : { ...item, show: true }
+            ),
+            filter,
+          };
+
+        case "IMPORTANT":
+          return {
+            todos: todos.map((item) =>
+              item.important
+                ? { ...item, show: true }
+                : { ...item, show: false }
+            ),
+            filter,
+          };
+
+        case "COMPLETED":
+          return {
+            todos: todos.map((item) =>
+              item.completed
+                ? { ...item, show: true }
+                : { ...item, show: false }
+            ),
+            filter,
+          };
+
+        default:
+          return state;
+      }
 
     default:
       return state;
   }
 };
-
 
 export default reducer;

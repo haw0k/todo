@@ -9,7 +9,7 @@ import {
 } from "semantic-ui-react";
 import cs from "classnames";
 import "./Todo.css";
-import { ITodo } from "../interfaces";
+import { ITodo } from "../../interfaces";
 
 interface IProps extends ITodo {
   deleteItem: Function;
