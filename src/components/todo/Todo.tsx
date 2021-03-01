@@ -24,14 +24,7 @@ const Todo: FC<IProps> = ({
   deleteItem,
   toggleItem,
 }) => {
-  // const [todoItem, setTodoItem] = useState({ title, completed, important });
 
-  // const toggleTodo = (type: string) => {
-  //   setTodoItem((todoItem) => ({
-  //     ...todoItem,
-  //     [type]: !todoItem[type],
-  //   }));
-  // };
   let color: SemanticCOLORS = "teal";
 
   if (important) {

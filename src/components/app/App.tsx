@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Container, Divider } from "semantic-ui-react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import AddTodo from "../add-todo/AddTodo";
 import AppFooter from "../app-footer/AppFooter";
 import AppHeader from "../app-header/AppHeader";
@@ -19,9 +19,14 @@ interface IProps {
   filter?: FilterType;
 }
 const App:FC<IProps> = ({ todos, filter }) => {
-
+  const dispatch = useDispatch();
   const completedCount = todos.filter((el: ITodo) => el.completed).length;
   const todoCount = todos.length - completedCount;
+
+  const dispatchAdd = (data) => { dispatch(addItem(data)) };
+  const dispatchDel = (data) => { dispatch(removeItem(data)) };
+  const dispatchToggle = (data) => { dispatch(toggleItem(data)) };
+  const dispatchFilter = (data) => { dispatch(filterItems(data)) };
 
   return (
     <div className='layout'>
@@ -29,21 +34,21 @@ const App:FC<IProps> = ({ todos, filter }) => {
         <Container text>
           <Divider hidden />
           <AppHeader />
-          <AddTodo addItem={addItem} />
+          <AddTodo addItem={dispatchAdd} />
         </Container>
       </header>
       <main>
         <Container text>
           <TodoList
             todos={todos}
-            deleteItem={removeItem}
-            toggleItem={toggleItem}
+            deleteItem={dispatchDel}
+            toggleItem={dispatchToggle}
           />
         </Container>
       </main>
       <footer>
         <Container text>
-          <Filter filter={filter} updateFilter={filterItems} />
+          <Filter filter={filter} updateFilter={dispatchFilter} />
           <AppFooter todoCount={todoCount} completedCount={completedCount} />
         </Container>
       </footer>
