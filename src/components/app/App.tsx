@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { Container, Divider } from "semantic-ui-react";
-import AddTodo from "./components/AddTodo";
-import AppFooter from "./components/AppFooter";
-import AppHeader from "./components/AppHeader";
-import TodoList from "./components/TodoList";
+import AddTodo from "../add-todo/AddTodo";
+import AppFooter from "../app-footer/AppFooter";
+import AppHeader from "../app-header/AppHeader";
+import TodoList from "../todo-list/TodoList";
+import Filter from "../filter/Filter";
 import {
   ITodo,
   TodoState,
   FieldBooleanType,
   FilterStatuses,
-} from "./interfaces";
-import Filter from "./components/Filter";
+} from "../../interfaces";
 import './App.css';
 
 const App = () => {
