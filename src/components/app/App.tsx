@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Divider } from "semantic-ui-react";
 import AddTodo from "../add-todo/AddTodo";
 import AppFooter from "../app-footer/AppFooter";
@@ -16,6 +16,15 @@ import './App.css';
 const App = () => {
   const [todos, setTodos] = useState([createTodoItem("Drink coffee", 1)]);
   const [filter, setFilter] = useState("all");
+
+  useEffect(() => {
+    const raw = localStorage.getItem('todos') || "";
+    setTodos(JSON.parse(raw))
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos))
+  }, [todos]);
 
   const updateFilter = (filter: FilterStatuses) => {
     setFilter(filter);
