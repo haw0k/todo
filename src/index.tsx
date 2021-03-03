@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import App from "./components/app/App";
 import "semantic-ui-css/semantic.min.css";
 import store from './store';
+import './index.css';
 
 ReactDOM.render(
   <Provider store={store}>

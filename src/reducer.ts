@@ -5,16 +5,13 @@ import {
   DELETE_TODO,
   TOGGLE_TODO,
   FILTER_TODO,
+  UPDATE_FILTER,
 } from "./interfaces";
 
+const raw = localStorage.getItem("todos");
+
 const initialState: StoreState = {
-  todos: [{
-    id: 1,
-    title: 'Learn Redux',
-    important: true,
-    completed: false,
-    show:true,
-  }],
+  todos: JSON.parse(raw),
   filter: "ALL",
 };
 
@@ -91,6 +88,12 @@ const reducer = (state = initialState, action: StoreActionTypes) => {
         default:
           return state;
       }
+
+    case UPDATE_FILTER:
+      return {
+        todos,
+        filter: action.filter,
+      };
 
     default:
       return state;

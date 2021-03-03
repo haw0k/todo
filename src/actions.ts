@@ -5,13 +5,14 @@ import {
   FILTER_TODO,
   StoreActionTypes,
   FilterType,
+  UPDATE_FILTER,
 } from "./interfaces";
 
-let nextTodoId: number = 0;
+// let nextTodoId: number = 0;
 
 export const addItem = (title: string): StoreActionTypes => ({
   type: ADD_TODO,
-  id: nextTodoId++,
+  id: Date.now(),
   title,
 });
 
@@ -27,5 +28,10 @@ export const toggleItem = (id: number): StoreActionTypes => ({
 
 export const filterItems = (filter: FilterType): StoreActionTypes => ({
   type: FILTER_TODO,
+  filter,
+});
+
+export const updateFilter = (filter: FilterType): StoreActionTypes => ({
+  type: UPDATE_FILTER,
   filter,
 });
