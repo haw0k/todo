@@ -1,48 +1,45 @@
 import React, { FC, useEffect } from "react";
 import { Container, Divider } from "semantic-ui-react";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AddTodo from "../add-todo/AddTodo";
 import AppFooter from "../app-footer/AppFooter";
 import AppHeader from "../app-header/AppHeader";
 import TodoList from "../todo-list/TodoList";
-import { ITodo, TodoState, FilterType } from "../../interfaces";
+import {
+  ITodo,
+  TodoState,
+  FilterType,
+  StoreState,
+  FieldBooleanType,
+} from "../../interfaces";
 import Filter from "../filter/Filter";
-import { addItem, removeItem, toggleItem, filterItems, updateFilter } from "../../actions";
+import { addItem, removeItem, toggleItem, filterItems } from "../../actions";
 import "./App.css";
 
-interface IProps {
-  todos?: TodoState;
-  filter?: FilterType;
-  addItem?: Function;
-  removeItem?: Function;
-  toggleItem?: Function;
-  filterItems?: Function;
-}
-const App: FC<IProps> = ({
-  todos,
-  filter,
-  addItem,
-  removeItem,
-  toggleItem,
-  filterItems,
-}) => {
-  // const dispatch = useDispatch();
+const App: FC = () => {
+  const todos: TodoState = useSelector((state: StoreState) => state.todos);
+  const filter: FilterType = useSelector((state: StoreState) => state.filter);
+  const dispatch = useDispatch();
   const completedCount = todos.filter((el: ITodo) => el.completed).length;
   const todoCount = todos.length - completedCount;
 
   useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos))
-    console.log(todos);
+    localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
   useEffect(() => {
-    filterItems(filter)
-  }, [filter, filterItems])
+    filterItems(filter);
+  }, [filter]);
 
-  // const dispatchAdd = (data) => { dispatch(addItem(data)) };
-  // const dispatchDel = (data) => { dispatch(removeItem(data)) };
-  // const dispatchToggle = (data) => { dispatch(toggleItem(data)) };
-  // const dispatchFilter = (data) => { dispatch(filterItems(data)) };
+  const dispatchAdd = (title: string) => {
+    dispatch(addItem(title));
+  };
+  const dispatchDel = (id: number) => {
+    dispatch(removeItem(id));
+  };
+  const dispatchToggle = (id: number, field: FieldBooleanType) => {
+    dispatch(toggleItem(id, field));
+  };
 
   return (
     <div className='layout'>
@@ -50,24 +47,21 @@ const App: FC<IProps> = ({
         <Container text>
           <Divider hidden />
           <AppHeader />
-          <AddTodo addItem={addItem} />
+          <AddTodo addItem={dispatchAdd} />
         </Container>
       </header>
       <main>
         <Container text>
           <TodoList
             todos={todos}
-            deleteItem={removeItem}
-            toggleItem={toggleItem}
+            deleteItem={dispatchDel}
+            toggleItem={dispatchToggle}
           />
         </Container>
       </main>
       <footer>
         <Container text>
-          <Filter
-            // filter={filter}
-            // updateFilter={updateFilter}
-          />
+          <Filter />
           <AppFooter todoCount={todoCount} completedCount={completedCount} />
         </Container>
       </footer>
@@ -75,16 +69,4 @@ const App: FC<IProps> = ({
   );
 };
 
-const mapStateToProps = ({ todos, filter }) => {
-  return { todos, filter };
-};
-
-const mapDispatchToProps = {
-  addItem,
-  removeItem,
-  toggleItem,
-  filterItems,
-  updateFilter,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

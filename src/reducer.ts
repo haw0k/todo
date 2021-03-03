@@ -40,9 +40,10 @@ const reducer = (state = initialState, action: StoreActionTypes) => {
       };
 
     case TOGGLE_TODO:
+      const { id, field} = action;
       return {
         todos: todos.map((todo) =>
-          todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
+          todo.id === id ? { ...todo, [field]: !todo[field] } : todo
         ),
         filter,
       };

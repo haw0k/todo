@@ -3,12 +3,12 @@ import {
   DELETE_TODO,
   TOGGLE_TODO,
   FILTER_TODO,
+  UPDATE_FILTER,
   StoreActionTypes,
   FilterType,
-  UPDATE_FILTER,
+  FieldBooleanType,
 } from "./interfaces";
 
-// let nextTodoId: number = 0;
 
 export const addItem = (title: string): StoreActionTypes => ({
   type: ADD_TODO,
@@ -21,9 +21,13 @@ export const removeItem = (id: number): StoreActionTypes => ({
   id,
 });
 
-export const toggleItem = (id: number): StoreActionTypes => ({
+export const toggleItem = (
+  id: number,
+  field: FieldBooleanType
+): StoreActionTypes => ({
   type: TOGGLE_TODO,
   id,
+  field,
 });
 
 export const filterItems = (filter: FilterType): StoreActionTypes => ({
