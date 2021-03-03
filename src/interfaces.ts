@@ -6,13 +6,12 @@ export const FILTER_TODO = "FILTER_TODO";
 export const UPDATE_FILTER = "UPDATE_FILTER";
 
 export type FilterType = "ALL" | "ACTIVE" | "IMPORTANT" | "COMPLETED";
-export type FieldBooleanType = "completed" | "important" | "show";
+export type FieldBooleanType = "completed" | "important";
 
 interface AddTodoAction {
   type: typeof ADD_TODO;
   id: number;
   title: string;
-  // completed: boolean;
 }
 
 interface DeleteTodoAction {
@@ -23,6 +22,7 @@ interface DeleteTodoAction {
 interface ToggleTodoAction {
   type: typeof TOGGLE_TODO;
   id: number;
+  field: FieldBooleanType;
 }
 
 interface FilterTodoAction {
