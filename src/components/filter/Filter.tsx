@@ -1,21 +1,24 @@
 import React, { FC } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Container } from "semantic-ui-react";
+import { FilterType, StoreState } from "../../interfaces";
 import { updateFilter } from "./../../actions";
 import "./Filter.css";
 
-interface IProps {
-  filter?: string;
-  updateFilter?: Function;
-}
-const Filter: FC<IProps> = ({ filter, updateFilter }) => {
+const Filter: FC = () => {
+  const filter: FilterType = useSelector((state: StoreState) => state.filter);
+  const dispatch = useDispatch();
+  const dispatchUpdateFilter = (filter: FilterType) => {
+    dispatch(updateFilter(filter));
+  };
+  
   return (
     <div className='filter'>
       <Container textAlign='center'>
         <Button.Group>
           <Button
             positive={filter === "ALL"}
-            onClick={() => updateFilter("ALL")}
+            onClick={() => dispatchUpdateFilter("ALL")}
             color='blue'
           >
             All
@@ -23,7 +26,7 @@ const Filter: FC<IProps> = ({ filter, updateFilter }) => {
           <Button.Or />
           <Button
             positive={filter === "ACTIVE"}
-            onClick={() => updateFilter("ACTIVE")}
+            onClick={() => dispatchUpdateFilter("ACTIVE")}
             color='teal'
           >
             Active
@@ -31,7 +34,7 @@ const Filter: FC<IProps> = ({ filter, updateFilter }) => {
           <Button.Or />
           <Button
             positive={filter === "COMPLETED"}
-            onClick={() => updateFilter("COMPLETED")}
+            onClick={() => dispatchUpdateFilter("COMPLETED")}
             color='grey'
           >
             Completed
@@ -39,7 +42,7 @@ const Filter: FC<IProps> = ({ filter, updateFilter }) => {
           <Button.Or />
           <Button
             positive={filter === "IMPORTANT"}
-            onClick={() => updateFilter("IMPORTANT")}
+            onClick={() => dispatchUpdateFilter("IMPORTANT")}
             color='orange'
           >
             Important
@@ -50,13 +53,12 @@ const Filter: FC<IProps> = ({ filter, updateFilter }) => {
   );
 };
 
-const mapStateToProps = ({ filter }) => {
-  return { filter };
-};
+// const mapStateToProps = ({ filter }) => {
+//   return { filter };
+// };
 
-const mapDispatchToProps = {
-  updateFilter,
-};
+// const mapDispatchToProps = {
+//   updateFilter,
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
-// export default Filter;
+export default Filter;

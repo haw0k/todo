@@ -12,7 +12,6 @@ interface AddTodoAction {
   type: typeof ADD_TODO;
   id: number;
   title: string;
-  // completed: boolean;
 }
 
 interface DeleteTodoAction {
