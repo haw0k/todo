@@ -23,23 +23,26 @@ const App: FC = () => {
   const completedCount = todos.filter((el: ITodo) => el.completed).length;
   const todoCount = todos.length - completedCount;
 
+  const dispatchAdd = (title: string) => {
+    dispatch(addItem(title));
+  };
+
+  const dispatchDel = (id: number) => {
+    dispatch(removeItem(id));
+  };
+
+  const dispatchToggle = (id: number, field: FieldBooleanType) => {
+    dispatch(toggleItem(id, field));
+  };
+
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
   useEffect(() => {
-    filterItems(filter);
-  }, [filter]);
+    dispatch(filterItems(filter));
+  }, [dispatch, filter]);
 
-  const dispatchAdd = (title: string) => {
-    dispatch(addItem(title));
-  };
-  const dispatchDel = (id: number) => {
-    dispatch(removeItem(id));
-  };
-  const dispatchToggle = (id: number, field: FieldBooleanType) => {
-    dispatch(toggleItem(id, field));
-  };
 
   return (
     <div className='layout'>
