@@ -2,15 +2,15 @@ import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Container } from "semantic-ui-react";
 import { FilterType, StoreState } from "../../interfaces";
-import { updateFilter } from "./../../actions";
+import { updateFilter } from "../../actions";
 import "./Filter.css";
 
 const Filter: FC = () => {
   const filter: FilterType = useSelector((state: StoreState) => state.filter);
   const dispatch = useDispatch();
-  const dispatchUpdateFilter = (filter: FilterType) => {
-    dispatch(updateFilter(filter));
-  };
+  // const dispatchUpdateFilter = (filter: FilterType) => {
+  //   dispatch(updateFilter(filter));
+  // };
   
   return (
     <div className='filter'>
@@ -18,7 +18,7 @@ const Filter: FC = () => {
         <Button.Group>
           <Button
             positive={filter === "ALL"}
-            onClick={() => dispatchUpdateFilter("ALL")}
+            onClick={() => dispatch(updateFilter("ALL"))}
             color='blue'
           >
             All
@@ -26,7 +26,7 @@ const Filter: FC = () => {
           <Button.Or />
           <Button
             positive={filter === "ACTIVE"}
-            onClick={() => dispatchUpdateFilter("ACTIVE")}
+            onClick={() => dispatch(updateFilter("ACTIVE"))}
             color='teal'
           >
             Active
@@ -34,7 +34,7 @@ const Filter: FC = () => {
           <Button.Or />
           <Button
             positive={filter === "COMPLETED"}
-            onClick={() => dispatchUpdateFilter("COMPLETED")}
+            onClick={() => dispatch(updateFilter("COMPLETED"))}
             color='grey'
           >
             Completed
@@ -42,7 +42,7 @@ const Filter: FC = () => {
           <Button.Or />
           <Button
             positive={filter === "IMPORTANT"}
-            onClick={() => dispatchUpdateFilter("IMPORTANT")}
+            onClick={() => dispatch(updateFilter("IMPORTANT"))}
             color='orange'
           >
             Important
