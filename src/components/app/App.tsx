@@ -11,19 +11,19 @@ import {
   FieldBooleanType,
   FilterStatuses,
 } from "../../interfaces";
-import './App.css';
+import "./App.css";
 
 const App = () => {
   const [todos, setTodos] = useState([createTodoItem("Drink coffee", 1)]);
   const [filter, setFilter] = useState("all");
 
   useEffect(() => {
-    const raw = localStorage.getItem('todos') || "";
-    setTodos(JSON.parse(raw))
+    const raw = localStorage.getItem("todos") || "";
+    setTodos(JSON.parse(raw));
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos))
+    localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
   const updateFilter = (filter: FilterStatuses) => {
@@ -91,7 +91,7 @@ const App = () => {
   const todoCount = todos.length - completedCount;
 
   return (
-    <div className="layout">
+    <div className='layout'>
       <header>
         <Container text>
           <Divider hidden />
